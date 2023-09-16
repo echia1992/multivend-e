@@ -1,7 +1,15 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter,Route,Routes} from "react-router-dom";
-import {HomePage} from './routes/Routes.js'
+import {
+    HomePage,
+    ProductsPage,
+    ProductDetailPage,
+    BestSellingPage,
+    EventsPage,
+    FAQPage,
+    CareerPage
+} from './routes/Routes.js'
 
 const App = () => {
 
@@ -9,6 +17,13 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<HomePage/>}/>
+                    <Route path='/products' element={<ProductsPage/>}/>
+                    <Route path='/product/:name' element={<ProductDetailPage/>}/>
+                    <Route path='/best-selling' element={<BestSellingPage/>}/>
+                    <Route path='/events' element={<EventsPage/>}/>
+                    <Route path='/faq' element={<FAQPage/>}/>
+                    <Route path='/career' element={<CareerPage/>}/>
+
                 </Routes>
             </BrowserRouter>
         );

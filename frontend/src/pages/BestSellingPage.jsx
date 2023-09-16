@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Events = ()=> {
+const BestSellingPage = () => {
+
         return (
             <div>
-                Events
+
             </div>
         );
 
 }
 
-export default Events;
+export default BestSellingPage;

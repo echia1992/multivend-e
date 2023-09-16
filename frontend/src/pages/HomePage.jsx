@@ -3,7 +3,7 @@ import Header from '../components/Layout/Header';
 import Hero from '../components/Hero/Hero';
 import Categories from '../components/Categories/Categories';
 import BestDeals from '../components/BestDeals/BestDeals';
-import Events from '../components/Events/Events';
+import Events from '../components/Route/Events/Events.jsx';
 import FeaturedProduct from '../components/FeaturedProduct/FeaturedProduct';
 import Partners from '../components/Partners/Partners';
 import Footer from '../components/Footer/Footer';

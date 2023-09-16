@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import {productData} from "../../statics/data";
 import styles from "../../styles/styles";
+import ProductCard from "../Route/ProductCard/ProductCard";
 
 
 const BestDeals = () => {
