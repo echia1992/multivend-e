@@ -5,11 +5,11 @@ import {Link} from "react-router-dom";
 const Partners = () =>{
 
         return (
-            <div className={`${styles.section}`}>
+            <div className={`${styles.section} bg-blue-50`}>
                     <div className={`${styles.heading}`}>
                         <h1>Our Partners</h1>
                     </div>
-                    <div className="  hidden sm:block bg-blue-50 py-10 px-5 mb-12 cursor-pointer rounded-xl">
+                    <div className="  hidden sm:block  py-10 px-5 mb-12 bg-blend-color-dodge cursor-pointer rounded-xl">
                         <div className="flex justify-between w-full">
                             <div className="flex items-start">
                                 <Link to='/partner/shop'>
