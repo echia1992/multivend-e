@@ -1,0 +1,26 @@
+const jwt = require('jsonwebtoken');
+
+const jwtSecret = 'yourSecretKey'; // Replace with your own secret key
+
+function signToken(payload) {
+    return jwt.sign(payload, jwtSecret, { expiresIn: '1h' }); // Token expires in 1 hour
+}
+
+module.exports = signToken;
+
+
+const express = require('express');
+const signToken = require('./path-to-signToken'); // Adjust the path as per your file structure
+
+const app = express();
+
+// Define a route where you want to generate and send a JWT
+app.get('/generate-token', (req, res) => {
+    const payload = { userId: 123 }; // Customize the payload as per your needs
+    const token = signToken(payload);
+    res.json({ token });
+});
+
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+});

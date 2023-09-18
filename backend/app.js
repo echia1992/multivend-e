@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
+const ErrorHandler = require('./middleware/errors')
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 
 
 app.use(express.json());
@@ -11,11 +11,12 @@ app.use(cookieParser());
 
 app.use(
     cors({
-        //origin : "http://localhost:3000" ,
-        origin: "*",
-        credential: true,
+        // origin : "http://localhost:3000" ,
+         origin: "*",
+         credential: true,
     })
 );
+
 app.use('/', express.static('uploads'));
 app.use(
     bodyParser.urlencoded({
@@ -30,7 +31,12 @@ if (process.env.NODE_ENV !== 'PRODUCTION'){
     })
 };
 
+const customer = require('./controller/customer');
 
-//app.use(ErrorHandler);
+
+app.use('/api/v2/customer',customer);
+
+app.use(ErrorHandler);
+
 
 module.exports = app;
