@@ -56,7 +56,7 @@ router.put('/create-customer', upload.single('file'), async (req,res,next)=>{
            success: true,
            message:`Dear ${customer.name} your account was successfully created `
        })
-       
+   
    }catch (error) {
        console.log(error)
 
