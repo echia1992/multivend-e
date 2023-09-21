@@ -8,7 +8,9 @@ import {
     BestSellingPage,
     EventsPage,
     FAQPage,
-    CareerPage
+    CareerPage,
+    SignUpPage,
+    LoginPage
 } from './routes/Routes.js'
 
 const App = () => {
@@ -17,6 +19,10 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<HomePage/>}/>
+                    <Route path='/login' element={<LoginPage/>}/>
+                    <Route path='/sign-up' element={<SignUpPage/>}/>
+
+
                     <Route path='/products' element={<ProductsPage/>}/>
                     <Route path='/product/:name' element={<ProductDetailPage/>}/>
                     <Route path='/best-selling' element={<BestSellingPage/>}/>

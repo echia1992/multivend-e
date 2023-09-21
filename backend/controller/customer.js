@@ -10,7 +10,7 @@ const fs = require('fs');
 //const sendMail = require('../utils/sendMail');
 
 
-router.put('/create-customer', upload.single('file'), async (req,res,next)=>{
+router.put('/create-customer', upload.single('profile'), async (req,res,next)=>{
    try {
        const {name, email, password} = req.body;
        const customerEmail = await Customer.findOne({email});
@@ -31,27 +31,19 @@ router.put('/create-customer', upload.single('file'), async (req,res,next)=>{
            return next(new ErrorHandler('Please input your email',400))
        }
            if (customerEmail) {
-               const filename = req.file.filename;
-               const filePath = `uploads/${filename}`;
-               fs.unlink(filePath, (err) => {
-                   if (err) {
-                       console.log(err);
-                       res.status(500).json({message: "Error deleting file"});
-                   }
-               });
+
                return next(new ErrorHandler("User already exists", 400));
            }
-
            const filename = req.file.filename;
            const fileUrl = path.join(filename);
 
        const customer = {
            name : name,
-           email:email,
-           password:password,
-           avatar:fileUrl,
-       }
-
+           email: email,
+           password: password,
+           avatar: fileUrl,
+       };
+       const newCustomer = await Customer.create(customer);
        res.status(201).json({
            success: true,
            message:`Dear ${customer.name} your account was successfully created `
