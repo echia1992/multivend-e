@@ -1,5 +1,5 @@
 import React,  {useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
 import {RxAvatar} from "react-icons/rx";
 import styles from "../../styles/styles";
@@ -13,7 +13,7 @@ const SignUp = () => {
     const [avatar, setAvatar] = useState();
     const [password, setPassword] = useState('');
     const [visible, setVisible] = useState('');
-
+    const navigate = useNavigate();
 
     const handleFileInputChange = (e) => {
         const file = e.target.files[0];
@@ -23,7 +23,7 @@ const SignUp = () => {
     const handleSubmit = (e) =>{
         e.preventDefault();
 
-        const config = { header: { "Content-Type": "multipart/form-data" } };
+        const config = { headers: { "Content-Type": "multipart/form-data" } };
 
         const newForm = new FormData();
 
@@ -32,7 +32,7 @@ const SignUp = () => {
         newForm.append('email',email);
         newForm.append('password', password);
 
-        axios.put(`${server}/customer/create-customer` , newForm , config).then((res)=>{
+        axios.put(`${server}/customer/create-user` , newForm , config).then((res)=>{
             toast.success(res.data.message);
             setEmail('');
             setName('');
@@ -41,6 +41,7 @@ const SignUp = () => {
         }).catch((error)=>{
             toast.error(error.response.data.message)
         });
+        navigate('/login');
     };
     return (
             <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
@@ -68,6 +69,7 @@ const SignUp = () => {
                                     <input
                                     type='text'
                                     name='name'
+                                    placeholder='Enter your name her'
                                     autoComplete='name'
                                     autoSave={name}
                                     value={name}
@@ -77,7 +79,7 @@ const SignUp = () => {
                                 </div>
                                 <br/>
                                 <label
-                                    htmlFor='name'
+                                    htmlFor='email'
                                     className='block text-sm font-medium text-gray-700'
                                 >
                                     Email Address<span className='text-red-500 cursor-pointer'>*</span>
@@ -86,6 +88,7 @@ const SignUp = () => {
                                     <input
                                         type='email'
                                         name='email'
+                                        placeholder='exmaple@gmail.com'
                                         autoComplete={email}
                                         autoSave={email}
                                         value={email}
@@ -95,7 +98,7 @@ const SignUp = () => {
                                 </div>
                                 <br/>
                                 <label
-                                    htmlFor='name'
+                                    htmlFor='password'
                                     className='block text-sm font-medium text-gray-700'
                                 >
                                     Password<span className='text-red-500 cursor-pointer'>*</span>
@@ -104,6 +107,7 @@ const SignUp = () => {
                                     <input
                                         type={visible ? "text" : "password"}
                                         name='password'
+                                        placeholder='enter your password'
                                         autoComplete="current-password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
@@ -170,6 +174,7 @@ const SignUp = () => {
                                 </button>
                             </div>
                             <div className={`${styles.normalFlex} w-full`}>
+                                <br/>
                                 <h4>Already have an account?</h4>
                                 <Link to='/login' className='text-blue-500 pl-2'>
                                     Sign In

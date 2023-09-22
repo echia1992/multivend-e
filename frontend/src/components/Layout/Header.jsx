@@ -15,7 +15,7 @@ import {useSelector} from "react-redux";
 import {backend_url} from "../../server";
 
 const Header = ({activeHeading}) => {
-  //  const { isAuthenticated , user } = useSelector ( ( state ) => state.user );
+    const { isAuthenticated , user } = useSelector ( ( state ) => state.user );
     const [ searchTerm , setSearchTerm ] = useState ( "" );
     const [ searchData , setSearchData ] = useState ( null );
     const [ active , setActive ] = useState ( false );
@@ -165,10 +165,10 @@ const Header = ({activeHeading}) => {
                             </div>
                             <div className={ `${ styles.normalFlex }` }>
                                 <div className="relative cursor-pointer mr-[15px]">
-                                    {/*{ isAuthenticated ? (*/}
+                                    { isAuthenticated ? (
                                         <Link to="/profile">
                                             <img
-                                                // src={ `${ backend_url }${ user?.avatar }` }
+                                                 src={ `${ backend_url }${ user?.avatar }` }
                                                 className="w-[50px] h-[50px] border-[3px] border-[#2736de] rounded-full"
                                                 alt=""
                                             />
@@ -294,11 +294,11 @@ const Header = ({activeHeading}) => {
                                 </div>
                                 <br/>
                                 <div className="flex w-full justify-center">
-                                    {/*{ isAuthenticated ? (*/}
+                                    { isAuthenticated ? (
                                         <div>
                                             <Link to="/profile">
                                                 <img
-                                                    // src={`${backend_url}${user?.avatar}`}
+                                                     src={`${backend_url}${user?.avatar}`}
                                                     className="w-[50px] h-[50px] border-[3px] border-[#2736de] rounded-full"
                                                     alt=""
                                                 />

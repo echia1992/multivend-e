@@ -7,7 +7,10 @@ const cors = require('cors');
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 app.use('/', express.static('uploads'));
 app.use(
     bodyParser.urlencoded({
@@ -23,10 +26,11 @@ if (process.env.NODE_ENV !== 'PRODUCTION'){
     })
 }
 
-const customer = require('./controller/customer');
+const user = require('./controller/user');
+const http = require("http");
 
 
-app.use('/api/v2/customer', customer);
+app.use('/api/v2/user', user);
 
 app.use(ErrorHandler);
 
