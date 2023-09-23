@@ -2,9 +2,9 @@ import React, {Component, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
 import axios from "axios";
-import {toast} from "react-toastify";
 import {server} from "../../server";
 import styles from "../../styles/styles";
+import {toast} from "react-toastify";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -13,15 +13,18 @@ const Login = () => {
     const [visible, setVisible] = useState('')
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        axios.post(`${server}/user/login-user`,{email, password},{withCredentials:true}).then((res)=>{
-            toast.success(res.data.message);
-            navigate('/');
-        }).catch((error)=>{
-            toast.error(error.response.data.message)
-            console.log(error)
+        await axios.post(`${server}/user/login-user`,{email, password},{withCredentials:true}).
+        then((res)=>{
+            toast.success ( "Login Successfully" );
+            navigate('/')
+            window.location.reload();
+
+        }).catch((err)=>{
+            toast.error(err.response.data.message)
+            console.log ( err );
         })
 
     }

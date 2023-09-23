@@ -17,6 +17,8 @@ import {
 } from './routes/Routes.js'
 import { ShopDashboardPage } from './routes/ShopRoutes.js'
 import Store from "./redux/store";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {LoadAdmin, LoadSeller, LoadUser} from "./redux/action/user";
 import ProtectedRoute from './routes/ProtectedRoute';
 import SellerProtectedRoute from './routes/SellerProtectedRoute';
@@ -71,6 +73,18 @@ const App = () => {
                         }
                     />
                 </Routes>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="dark"
+                />
             </BrowserRouter>
         );
 

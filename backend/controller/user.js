@@ -113,10 +113,16 @@ router.post (
         }
     } )
 );
-router.post('/login-user',async (req,res,next)=>{
+router.post('/login-user',catchAsyncErrors(async (req,res,next)=>{
     try {
         const {email , password} = req.body;
 
+        if (typeof email ==='undefined' || email == null || email ===''){
+            return next(new ErrorHandler('Please input your email',400))
+        }
+        if (typeof password === 'undefined' || password == null || password ===""){
+            return next (new ErrorHandler('Password field be not be empty',400))
+        }
         if (!email || !password ){
             return next(new ErrorHandler('Incorrect email and password'));
         }
@@ -126,7 +132,7 @@ router.post('/login-user',async (req,res,next)=>{
         }
         const isPasswordValid = await user.comparePassword( password );
         if (!isPasswordValid){
-            return next(new ErrorHandler('invalid credentials'))
+            return next(new ErrorHandler('Incorrect email and password'))
         }
         sendToken(user,201, res);
         await sendMail({
@@ -138,6 +144,7 @@ router.post('/login-user',async (req,res,next)=>{
         return next(new ErrorHandler(error.message,500))
     }
 })
+);
 
 router.get (
     "/get-user" ,

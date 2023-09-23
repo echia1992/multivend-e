@@ -20,7 +20,7 @@ const SignUp = () => {
         setAvatar(file);
     };
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
 
         const config = { headers: { "Content-Type": "multipart/form-data" } };
@@ -32,7 +32,7 @@ const SignUp = () => {
         newForm.append('email',email);
         newForm.append('password', password);
 
-        axios.put(`${server}/customer/create-user` , newForm , config).then((res)=>{
+      await  axios.put(`${server}/user/create-user` , newForm , config).then((res)=>{
             toast.success(res.data.message);
             setEmail('');
             setName('');
@@ -46,12 +46,12 @@ const SignUp = () => {
     return (
             <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                    <div className="sm:mx-auto sm:w-full sm:max-w-md pl-[140px] cursor-pointer">
+                    <div className="sm:mx-auto sm:w-full sm:max-w-md pl-[140px] cursor-pointer items-center">
                         <Link to='/'>
                             <img src='/handc-logo.png' alt=''/>
                         </Link>
                     </div>
-                    <h1 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
+                    <h1 className='mt-6 text-center text-3xl font-extrabold text-gray-900 items-center'>
                             Register as new Customer
                     </h1>
                 </div>
